@@ -1,0 +1,427 @@
+@component("layouts/app", {title: "Enregistrer un nouvel étudiant"})
+  @slot('main')
+    <div class="min-h-screen bg-gray-100 py-6">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-4 mb-4">
+            <a href="/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+              <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Retour au tableau de bord
+            </a>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">
+            Enregistrer un nouvel étudiant
+          </h1>
+          <p class="text-gray-600">
+            Remplissez le formulaire ci-dessous pour ajouter un nouvel étudiant
+          </p>
+        </header>
+
+        <!-- Form Card -->
+        <div class="bg-white rounded-lg shadow">
+          <!-- Form Header -->
+          <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+            <h2 class="text-lg font-medium text-gray-900">
+              Informations personnelles
+            </h2>
+          </div>
+
+          <!-- Form Content -->
+          <form action="/students" method="POST" class="p-6 space-y-6">
+            {{ csrfField() }}
+            <!-- Row 1: Nom et Prénom -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">
+                  Nom <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                  placeholder="ex: Dupont"
+                />
+              </div>
+
+              <div>
+                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">
+                  Prénom <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                  placeholder="ex: Marie"
+                />
+              </div>
+            </div>
+
+            <!-- Row 2: Email et Téléphone -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                  Email <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                  placeholder="marie.dupont@example.com"
+                />
+              </div>
+
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                  Téléphone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                  placeholder="+243 xxx xxx xxx"
+                />
+              </div>
+            </div>
+
+            <!-- Row 3: Date de naissance et Sexe -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-2">
+                  Date de naissance <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  id="date_of_birth"
+                  name="date_of_birth"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">
+                  Sexe <span class="text-red-500">*</span>
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="">
+                    Sélectionner une option
+                  </option>
+                  <option value="M">
+                    Masculin
+                  </option>
+                  <option value="F">
+                    Féminin
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section: Informations scolaires -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="text-lg font-medium text-gray-900 mb-4">
+                Informations scolaires
+              </h3>
+
+              <!-- Row 4: Classe et Numéro matricule -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="class_level" class="block text-sm font-medium text-gray-700 mb-2">
+                    Classe <span class="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="class_level"
+                    name="class_level"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <option value="">
+                      Sélectionner une classe
+                    </option>
+                    <option value="1HBG">
+                      1ère Humanités - Biologie Générale
+                    </option>
+                    <option value="1HCG">
+                      1ère Humanités - Chimie Générale
+                    </option>
+                    <option value="1HPG">
+                      1ère Humanités - Physique Générale
+                    </option>
+                    <option value="2HBG">
+                      2ème Humanités - Biologie Générale
+                    </option>
+                    <option value="2HCG">
+                      2ème Humanités - Chimie Générale
+                    </option>
+                    <option value="2HPG">
+                      2ème Humanités - Physique Générale
+                    </option>
+                    <option value="3HBG">
+                      3ème Humanités - Biologie Générale
+                    </option>
+                    <option value="3HCG">
+                      3ème Humanités - Chimie Générale
+                    </option>
+                    <option value="3HPG">
+                      3ème Humanités - Physique Générale
+                    </option>
+                    <option value="4HBG">
+                      4ème Humanités - Biologie Générale
+                    </option>
+                    <option value="4HCG">
+                      4ème Humanités - Chimie Générale
+                    </option>
+                    <option value="4HPG">
+                      4ème Humanités - Physique Générale
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="student_number" class="block text-sm font-medium text-gray-700 mb-2">
+                    Numéro matricule <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="student_number"
+                    name="student_number"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="ex: 2024001"
+                  />
+                </div>
+              </div>
+
+              <!-- Row 5: Date d'inscription et Statut -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="enrollment_date" class="block text-sm font-medium text-gray-700 mb-2">
+                    Date d'inscription
+                  </label>
+                  <input
+                    type="date"
+                    id="enrollment_date"
+                    name="enrollment_date"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                    Statut <span class="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="status"
+                    name="status"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <option value="">
+                      Sélectionner un statut
+                    </option>
+                    <option value="actif">
+                      Actif
+                    </option>
+                    <option value="suspendu">
+                      Suspendu
+                    </option>
+                    <option value="gradué">
+                      Gradué
+                    </option>
+                    <option value="abandon">
+                      Abandon
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Adresse -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="text-lg font-medium text-gray-900 mb-4">
+                Adresse
+              </h3>
+
+              <div class="mb-6">
+                <label for="street_address" class="block text-sm font-medium text-gray-700 mb-2">
+                  Rue/Adresse
+                </label>
+                <input
+                  type="text"
+                  id="street_address"
+                  name="street_address"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                  placeholder="123 Rue de la Paix"
+                />
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <label for="city" class="block text-sm font-medium text-gray-700 mb-2">
+                    Ville
+                  </label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="Kinshasa"
+                  />
+                </div>
+
+                <div>
+                  <label for="state" class="block text-sm font-medium text-gray-700 mb-2">
+                    Province
+                  </label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="Kasai Central"
+                  />
+                </div>
+
+                <div>
+                  <label for="zip_code" class="block text-sm font-medium text-gray-700 mb-2">
+                    Code postal
+                  </label>
+                  <input
+                    type="text"
+                    id="zip_code"
+                    name="zip_code"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="00001"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Contact d'urgence -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="text-lg font-medium text-gray-900 mb-4">
+                Contact d'urgence
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="emergency_name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Nom du contact
+                  </label>
+                  <input
+                    type="text"
+                    id="emergency_name"
+                    name="emergency_name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="Jean Dupont"
+                  />
+                </div>
+
+                <div>
+                  <label for="emergency_phone" class="block text-sm font-medium text-gray-700 mb-2">
+                    Téléphone du contact
+                  </label>
+                  <input
+                    type="tel"
+                    id="emergency_phone"
+                    name="emergency_phone"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
+                    placeholder="+243 xxx xxx xxx"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="emergency_relation" class="block text-sm font-medium text-gray-700 mb-2">
+                  Relation avec l'étudiant
+                </label>
+                <select
+                  id="emergency_relation"
+                  name="emergency_relation"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="">
+                    Sélectionner une relation
+                  </option>
+                  <option value="parent">
+                    Parent
+                  </option>
+                  <option value="tuteur">
+                    Tuteur
+                  </option>
+                  <option value="frere">
+                    Frère
+                  </option>
+                  <option value="soeur">
+                    Sœur
+                  </option>
+                  <option value="autres">
+                    Autres
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="border-t border-gray-200 pt-6 flex gap-3 justify-end">
+              <a
+                href="/"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none"
+              >
+                Annuler
+              </a>
+              <button
+                type="submit"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Enregistrer l'étudiant
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Info Box -->
+        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div class="flex">
+            <svg
+              class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div>
+              <p class="text-sm text-blue-800">
+                <strong>Info :</strong>Les champs marqués avec un astérisque (<span class="text-red-500">*</span>) sont obligatoires.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  @endslot
+@end
